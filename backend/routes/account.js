@@ -7,19 +7,25 @@ import { prisma } from "../prisma/lib/prisma.js";
 
 const router = express.Router();
 
-const authSchema = zod.object({
+const signupSchema = zod.object({
+  name: zod.string().optional(),
+  username: zod.string().email(),
+  password: zod.string()
+});
+
+const signinSchema = zod.object({
   username: zod.string().email(),
   password: zod.string()
 });
 
 // SIGNUP
 router.post("/signup", async (req, res) => {
-  const parsed = authSchema.safeParse(req.body);
+  const parsed = signupSchema.safeParse(req.body);
   if (!parsed.success) {
     return res.status(400).json({ message: "Invalid input" });
   }
 
-  const { username, password } = parsed.data;
+  const { name, username, password } = parsed.data;
 
   const existingUser = await prisma.user.findUnique({
     where: { username }
@@ -32,7 +38,7 @@ router.post("/signup", async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await prisma.user.create({
-    data: { username, password: hashedPassword }
+    data: { name: name || "", username, password: hashedPassword }
   });
 
   const token = jwt.sign(
@@ -46,7 +52,7 @@ router.post("/signup", async (req, res) => {
 
 // SIGNIN
 router.post("/signin", async (req, res) => {
-  const parsed = authSchema.safeParse(req.body);
+  const parsed = signinSchema.safeParse(req.body);
   if (!parsed.success) {
     return res.status(400).json({ message: "Invalid input" });
   }

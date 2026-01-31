@@ -1,20 +1,24 @@
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { Signup } from './pages/Signup'
+import { Signin } from './pages/Signin'
+import { Blog } from './pages/Blog'
+import { Blogs } from './pages/Blogs'
+import { CreateBlog } from './pages/CreateBlog'
+import { Header } from './components/Header'
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <div className="p-8 rounded-xl shadow-lg bg-white text-center">
-        <h1 className="text-3xl font-bold text-blue-600 mb-4">
-          Tailwind CSS is Working 🚀
-        </h1>
-
-        <p className="text-gray-600 mb-6">
-          If you see colors, spacing, and rounded corners, Tailwind is set up correctly.
-        </p>
-
-        <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
-          Test Button
-        </button>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Navigate to="/blogs" replace />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blog/:id" element={<Blog />} />
+        <Route path="/create" element={<CreateBlog />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
