@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-      "start": "node index.js",
+      "start": "tsx index.js",
     "migrate": "npx prisma migrate deploy",
     "postinstall": "npx prisma generate",
     "build": "echo \"no build step\""
