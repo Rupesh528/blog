@@ -8,7 +8,6 @@ export const CreateBlog = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [published, setPublished] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -25,7 +24,7 @@ export const CreateBlog = () => {
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/blog`,
-        { title, content, published },
+        { title, content, published: true },
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -33,11 +32,7 @@ export const CreateBlog = () => {
         }
       );
       
-      if (published) {
-        navigate(`/blog/${response.data.id}`);
-      } else {
-        navigate("/blogs");
-      }
+      navigate(`/blog/${response.data.id}`);
     } catch (error: any) {
       console.error("Error creating blog:", error);
       alert(error.response?.data?.message || "Failed to create blog");
@@ -72,20 +67,7 @@ export const CreateBlog = () => {
               />
             </div>
 
-            <div className="flex items-center justify-between pt-6 border-t border-gray-200">
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  id="published"
-                  checked={published}
-                  onChange={(e) => setPublished(e.target.checked)}
-                  className="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-900"
-                />
-                <label htmlFor="published" className="text-sm text-gray-700 cursor-pointer">
-                  Publish immediately
-                </label>
-              </div>
-
+            <div className="flex items-center justify-end pt-6 border-t border-gray-200">
               <div className="flex gap-3">
                 <button
                   type="button"
