@@ -19,7 +19,12 @@ app.use(express.json());
 
 app.use("/api/v1/user", rootrouter);
 
-app.use('/api/v1/blog', blogrouter);  
+app.use('/api/v1/blog', blogrouter);
+
+// Root endpoint
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to the Medium Backend API" });
+});
 
 // Health check endpoint
 app.get("/health", (req, res) => {
