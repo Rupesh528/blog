@@ -13,6 +13,7 @@
     "@100xdevs/medium-common": "^1.0.0",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.4",
+    "dotenv": "^17.2.3",
     "install": "^0.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
