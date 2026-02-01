@@ -46,68 +46,62 @@ export const CreateBlog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <div className="flex-grow">
-        <div className="max-w-3xl mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Create New Blog</h1>
-
-          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg border border-gray-200">
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Title
-              </label>
+        <div className="max-w-3xl mx-auto px-4 py-12">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-8">
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter blog title..."
+                className="w-full text-4xl md:text-5xl font-bold text-gray-900 placeholder-gray-400 border-none outline-none focus:outline-none"
+                placeholder="Title"
               />
             </div>
 
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Content
-              </label>
+            <div className="mb-8">
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 required
-                rows={15}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Write your blog content here..."
+                rows={20}
+                className="w-full text-lg text-gray-800 placeholder-gray-400 border-none outline-none focus:outline-none resize-none leading-relaxed"
+                placeholder="Tell your story..."
               />
             </div>
 
-            <div className="mb-6 flex items-center">
-              <input
-                type="checkbox"
-                id="published"
-                checked={published}
-                onChange={(e) => setPublished(e.target.checked)}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <label htmlFor="published" className="ml-2 text-sm text-gray-700">
-                Publish immediately
-              </label>
-            </div>
+            <div className="flex items-center justify-between pt-6 border-t border-gray-200">
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="published"
+                  checked={published}
+                  onChange={(e) => setPublished(e.target.checked)}
+                  className="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-900"
+                />
+                <label htmlFor="published" className="text-sm text-gray-700 cursor-pointer">
+                  Publish immediately
+                </label>
+              </div>
 
-            <div className="flex gap-4">
-              <button
-                type="submit"
-                disabled={loading}
-                className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 disabled:opacity-50"
-              >
-                {loading ? "Creating..." : "Create Blog"}
-              </button>
-              <button
-                type="button"
-                onClick={() => navigate("/blogs")}
-                className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-              >
-                Cancel
-              </button>
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => navigate("/blogs")}
+                  className="px-5 py-2 text-sm text-gray-600 hover:text-gray-900"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="px-6 py-2 text-sm bg-green-600 text-white rounded-full hover:bg-green-700 disabled:opacity-50 transition-colors"
+                >
+                  {loading ? "Publishing..." : "Publish"}
+                </button>
+              </div>
             </div>
           </form>
         </div>

@@ -10,6 +10,7 @@ interface Blog {
   content: string;
   author: {
     name: string;
+    id: number;
   };
 }
 
@@ -40,37 +41,49 @@ export const Blogs = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <div className="flex-grow">
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">All Blogs</h1>
-            <p className="text-gray-600">Read stories from our community</p>
-          </div>
-
+        <div className="max-w-3xl mx-auto px-4 py-12">
           {blogs.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500">No blogs published yet.</p>
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg">No blogs published yet.</p>
             </div>
           ) : (
-            <div className="space-y-6">
-              {blogs.map((blog) => (
-                <div
-                  key={blog.id}
-                  onClick={() => navigate(`/blog/${blog.id}`)}
-                  className="bg-white p-6 rounded-lg border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors"
-                >
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-                    {blog.title}
-                  </h2>
-                  <p className="text-gray-600 mb-4 line-clamp-3">
-                    {blog.content.length > 150 
-                      ? blog.content.substring(0, 150) + "..." 
-                      : blog.content}
-                  </p>
-                  <div className="text-sm text-gray-500">
-                    By {blog.author.name}
-                  </div>
+            <div className="space-y-0">
+              {blogs.map((blog, index) => (
+                <div key={blog.id}>
+                  <article
+                    className="cursor-pointer group py-8"
+                    onClick={() => navigate(`/blog/${blog.id}`)}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1">
+                        <div 
+                          className="text-sm text-gray-600 mb-2 hover:text-gray-900 inline-block"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/author/${blog.author.id}/blogs`);
+                          }}
+                        >
+                          {blog.author.name}
+                        </div>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:underline leading-tight">
+                          {blog.title}
+                        </h2>
+                        <p className="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                          {blog.content.length > 200 
+                            ? blog.content.substring(0, 200) + "..." 
+                            : blog.content}
+                        </p>
+                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                          <span>3 min read</span>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  {index < blogs.length - 1 && (
+                    <div className="border-b border-gray-200"></div>
+                  )}
                 </div>
               ))}
             </div>

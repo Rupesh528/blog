@@ -48,12 +48,46 @@ router.get("/bulk", async (req, res) => {
       title: true,
       content: true,
       author: {
-        select: { name: true }
+        select: { name: true, id: true }
       }
     }
   });
 
   res.json({ blogs });
+});
+
+// GET BLOGS BY AUTHOR ID
+router.get("/author/:authorId", async (req, res) => {
+  const authorId = Number(req.params.authorId);
+
+  const blogs = await prisma.blog.findMany({
+    where: { 
+      authorId,
+      published: true 
+    },
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      author: {
+        select: { name: true, id: true }
+      }
+    },
+    orderBy: {
+      id: 'desc'
+    }
+  });
+
+  // Get author name
+  const author = await prisma.user.findUnique({
+    where: { id: authorId },
+    select: { name: true }
+  });
+
+  res.json({ 
+    blogs,
+    author: author || null
+  });
 });
 
 // GET BLOG BY ID
@@ -67,6 +101,7 @@ router.get("/:id", async (req, res) => {
       title: true,
       content: true,
       published: true,
+      authorId: true,
       author: {
         select: { name: true }
       }
@@ -78,6 +113,24 @@ router.get("/:id", async (req, res) => {
   }
 
   res.json({ blog });
+});
+
+// DELETE BLOG (secure)
+router.delete("/:id", authMiddleware, async (req, res) => {
+  const id = Number(req.params.id);
+
+  const result = await prisma.blog.deleteMany({
+    where: {
+      id,
+      authorId: req.userId
+    }
+  });
+
+  if (result.count === 0) {
+    return res.status(403).json({ message: "Not allowed or blog not found" });
+  }
+
+  res.json({ message: "Blog deleted successfully" });
 });
 
 export default router;

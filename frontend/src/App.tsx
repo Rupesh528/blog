@@ -4,6 +4,8 @@ import { Signin } from './pages/Signin'
 import { Blog } from './pages/Blog'
 import { Blogs } from './pages/Blogs'
 import { CreateBlog } from './pages/CreateBlog'
+import { EditBlog } from './pages/EditBlog'
+import { AuthorBlogs } from './pages/AuthorBlogs'
 import { Header } from './components/Header'
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<Blog />} />
+        <Route path="/blog/:id/edit" element={<EditBlog />} />
+        <Route path="/author/:authorId/blogs" element={<AuthorBlogs />} />
         <Route path="/create" element={<CreateBlog />} />
       </Routes>
     </BrowserRouter>
