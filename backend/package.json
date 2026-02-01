@@ -5,9 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --import tsx index.js",
+      "start": "node index.js",
     "migrate": "npx prisma migrate deploy",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate",
+    "build": "echo \"no build step\""
   },
   "keywords": [],
   "author": "",
