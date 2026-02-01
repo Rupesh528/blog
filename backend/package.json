@@ -8,7 +8,7 @@
     "start": "node index.js",
     "build": "prisma generate",
     "migrate": "prisma migrate deploy",
-    "postinstall": "prisma generate"
+    "postinstall": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -22,16 +22,20 @@
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^6.19.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.17.2",
+    "prisma": "^6.19.2",
     "router": "^2.2.0",
     "zod": "^4.3.5"
   },
   "engines": {
     "node": ">=20"
   }
+  
+
 }
