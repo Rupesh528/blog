@@ -2,10 +2,16 @@ import {  useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { SignupInput } from "@100xdevs/medium-common";
 import type { ChangeEvent } from "react";
-import type { SignupInput } from "@100xdevs/common";
+// import type { SignupInput } from "@100xdevs/common";
 
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+interface SignupInput {
+  username: string;
+  password: string;
+  name?: string;
+}
+
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     const navigate = useNavigate();
