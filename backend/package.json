@@ -16,14 +16,12 @@
   "devDependencies": {
     "@types/node": "^25.0.9",
     "@types/pg": "^8.16.0",
-    "prisma": "^7.2.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
-    "@prisma/client": "^7.2.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -32,7 +30,8 @@
     "pg": "^8.17.2",
     "router": "^2.2.0",
     "zod": "^4.3.5"
-  },    "engines": {
-    "node": "20.19.x"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
