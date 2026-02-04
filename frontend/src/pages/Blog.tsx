@@ -76,7 +76,7 @@ export const Blog = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-500">Loading blog...</div>
+        <div className="text-gray-500">Loading blog... ( may 20-30 sec due to cold start of the backend server :) )</div>
       </div>
     );
   }
