@@ -35,7 +35,7 @@ export const Blogs = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-500">Loading blogs...</div>
+        <div className="text-gray-500">Loading blogs...(may take 20-30 sec for the first time due to cold start</div>
       </div>
     );
   }
